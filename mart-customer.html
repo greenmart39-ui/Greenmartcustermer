@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MART — ඔන්ලයින් සුපිරි වෙළඳසල</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="mart-customer.css">
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth-screen">
+  <div class="auth-wrap">
+    <div class="auth-logo">
+      <div class="auth-logo-mark">◈ MART</div>
+      <div class="auth-logo-sub">ඔන්ලයින් සුපිරි වෙළඳසල</div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div id="auth-step1" class="auth-box">
+      <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:4px">ආයුබෝවන්! 👋</div>
+      <div style="font-size:13px;color:var(--text3);margin-bottom:20px">ඔබේ ගිණුම් වර්ගය තෝරන්න</div>
+      <div class="type-sel">
+        <div class="to sel" id="t-retail" onclick="selType2('retail')">
+          <div class="to-ico">🛍</div>
+          <div class="to-lbl">Retail</div>
+          <div class="to-sub">පෞද්ගලික සාප්පු</div>
+        </div>
+        <div class="to" id="t-wholesale" onclick="selType2('wholesale')">
+          <div class="to-ico">🏭</div>
+          <div class="to-lbl">Wholesale</div>
+          <div class="to-sub">තොග ඇණවුම්</div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="goLogin()" style="margin-bottom:8px">ඉදිරියට →</button>
+      <div class="auth-switch">නව ගිණුමක්? <span onclick="goReg()">ලියාපදිංචි වන්න</span></div>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="auth-login" class="auth-box" style="display:none">
+      <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:4px">ඇතුල් වන්න</div>
+      <div style="font-size:13px;color:var(--text3);margin-bottom:20px" id="login-sub">Retail ගිණුම</div>
+      <div class="fg"><label class="fl">ඊමේල් ලිපිනය</label><input class="fi" id="l-email" type="email" placeholder="email@example.com" onkeydown="if(event.key==='Enter')doLogin()"><div class="field-err" id="l-email-err"></div></div>
+      <div class="fg"><label class="fl">මුරපදය</label><input class="fi" id="l-pass" type="password" placeholder="ඔබේ මුරපදය" onkeydown="if(event.key==='Enter')doLogin()"><div class="field-err" id="l-pass-err"></div></div>
+      <button class="btn btn-primary btn-full" onclick="doLogin()" style="margin-bottom:8px">ඇතුල් වන්න →</button>
+      <div class="auth-switch"><span onclick="goBack()">← ආපසු</span> · <span onclick="goReg()">ලියාපදිංචි වන්න</span></div>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="auth-reg" class="auth-box" style="display:none">
+      <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:4px">නව ගිණුම</div>
+      <div style="font-size:13px;color:var(--text3);margin-bottom:20px" id="reg-sub">Retail ගනුදෙනුකරු</div>
+      <div class="fg"><label class="fl">සම්පූර්ණ නම</label><input class="fi" id="r-name" placeholder="ඔබේ සම්පූර්ණ නම"><div class="field-err" id="r-name-err"></div></div>
+      <div class="fr">
+        <div class="fg"><label class="fl">ඊමේල්</label><input class="fi" id="r-email" type="email" placeholder="email@example.com"><div class="field-err" id="r-email-err"></div></div>
+        <div class="fg"><label class="fl">දුරකථන</label><input class="fi" id="r-phone" placeholder="+94 77 000 0000"><div class="field-err" id="r-phone-err"></div></div>
+      </div>
+      <div class="fg"><label class="fl">ලිපිනය (Address)</label><input class="fi" id="r-addr" placeholder="ඔබේ සම්පූර්ණ ලිපිනය..."><div class="field-err" id="r-addr-err"></div></div>
+      <div id="ws-extra" style="display:none">
+        <div class="fg"><label class="fl">ව්‍යාපාරයේ නම</label><input class="fi" id="r-biz" placeholder="ව්‍යාපාරය"></div>
+        <div class="fg"><label class="fl">🗺 Route තෝරන්න</label><select class="fs" id="r-route"><option value="">Route තෝරන්න...</option></select><div class="field-err" id="r-route-err"></div></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">මුරපදය</label><input class="fi" id="r-pass" type="password" placeholder="අවම 6 අකුරු"><div class="field-err" id="r-pass-err"></div></div>
+        <div class="fg"><label class="fl">නැවත මුරපදය</label><input class="fi" id="r-pass2" type="password" placeholder="නැවත ඇතුල් කරන්න"><div class="field-err" id="r-pass2-err"></div></div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="doReg()" style="margin-bottom:8px">ගිණුම හදන්න →</button>
+      <div class="auth-switch"><span onclick="goBack()">← ආපසු</span> · <span onclick="goLogin()">දැනටමත් ගිණුමක් ඇත</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <nav class="navbar">
+    <div class="nav-logo">◈ MART</div>
+    <div style="display:flex;gap:2px">
+      <div class="nl act" onclick="navTo('shop',this)">🛒 සාප්පු</div>
+      <div class="nl" onclick="navTo('orders',this)">📋 ඇණවුම්</div>
+      <div class="nl" onclick="navTo('wishlist',this)">❤️ ලිස්ට්</div>
+      <div class="nl" onclick="navTo('account',this)">⭐ ගිණුම</div>
+      <div class="nl" onclick="navTo('support',this)">💬 සහාය</div>
+    </div>
+    <div class="nav-right">
+      <button onclick="openUpdateModal()" style="background:none;border:1px solid var(--border);border-radius:8px;padding:4px 9px;font-size:11px;color:var(--text3);cursor:pointer">🔄 v2.1</button>
+      <div class="notif-btn" onclick="toggleNP()">🔔<span class="n-dot" id="ndot"></span></div>
+      <div class="cart-btn" onclick="openCart()">🛒 <span class="cart-bubble" id="cart-count">0</span></div>
+      <div class="user-chip" onclick="navTo('account',null)">
+        <div class="user-av" id="u-av">?</div>
+        <span style="font-size:13px;color:var(--text)" id="u-name">...</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- NOTIF PANEL -->
+  <div class="np" id="np">
+    <div class="np-head"><span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px">දැනුම්දීම්</span><button class="btn btn-ghost btn-sm" onclick="markNR()">ඔක්කොම කියවා ඇත</button></div>
+    <div class="np-items" id="np-items"></div>
+  </div>
+
+  <!-- SHOP -->
+  <div class="page act" id="page-shop">
+    <div class="ticker" id="ticker">
+      <span class="ticker-lbl">🏷 දීමනා</span>
+      <div class="ticker-scroll"><div class="ticker-inner" id="ticker-inner"></div></div>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="hero-title">නැවුම් සාමග්‍රී<br><span>ඔබේ දොරකදීම</span></div>
+        <div class="hero-sub" id="hero-sub">හොඳම මිල · වේගවත් බෙදාහැරීම</div>
+        <div class="hero-badges">
+          <span class="hb">🚚 ගෙදර දොරා</span>
+          <span class="hb">🏪 සාප්පුවෙන්</span>
+          <span class="hb" id="mode-badge">🛍 Retail</span>
+        </div>
+      </div>
+      <div style="font-size:70px;opacity:.35">🛒</div>
+    </div>
+    <div class="loyalty-banner" id="loyalty-banner" style="display:none">
+      <div class="lb-left">
+        <span class="lb-icon">⭐</span>
+        <div>
+          <div class="lb-pts" id="lb-pts">0</div>
+          <div class="lb-sub">Loyalty Points · <span id="lb-tier-name" style="color:var(--gold)">Bronze</span></div>
+        </div>
+      </div>
+      <div class="lb-right">
+        <div class="lb-val" id="lb-val">රු. 0.00</div>
+        <div class="lb-tier">ලබා ගත හැකි ලෙස</div>
+      </div>
+    </div>
+    <div class="shop-layout">
+      <aside class="shop-sidebar">
+        <div style="margin-bottom:14px">
+          <div class="filter-title">Category</div>
+          <div id="cat-list"></div>
+        </div>
+      </aside>
+      <div class="shop-main">
+        <div class="search-wrap"><input class="search-bar" id="search-in" type="text" placeholder="🔍 නිෂ්පාදනය සොයන්න..." oninput="fSearch(this.value)"></div>
+        <div id="offer-banner" style="margin-bottom:14px"></div>
+        <div class="products-grid" id="products-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WISHLIST -->
+  <div class="page" id="page-wishlist">
+    <div style="padding:20px;max-width:1000px;margin:0 auto">
+      <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:6px">❤️ මගේ ලිස්ට්</div>
+      <div style="font-size:13px;color:var(--text3);margin-bottom:18px">ඔබ සුරැකූ නිෂ්පාදන</div>
+      <div class="products-grid" id="wish-grid"></div>
+    </div>
+  </div>
+
+  <!-- ORDERS -->
+  <div class="page" id="page-orders">
+    <div style="padding:20px;max-width:750px;margin:0 auto">
+      <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:16px">📋 මගේ ඇණවුම්</div>
+      <div id="my-orders"></div>
+    </div>
+  </div>
+
+  <!-- ACCOUNT -->
+  <div class="page" id="page-account">
+    <div class="acc-grid">
+      <div>
+        <div class="acc-card">
+          <div class="acc-card-title">👤 ගිණුම</div>
+          <div style="text-align:center;margin-bottom:16px">
+            <div style="width:56px;height:56px;border-radius:50%;background:var(--accent);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:var(--bg)" id="acc-av">?</div>
+            <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700" id="acc-name">—</div>
+            <div style="font-size:13px;color:var(--text3);margin-top:2px" id="acc-type">—</div>
+          </div>
+          <div style="font-size:13px;color:var(--text2);border-top:1px solid var(--border);padding-top:12px">
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text3)">ඊමේල්</span><span id="acc-email">—</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text3)">දුරකථන</span><span id="acc-phone">—</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text3)">ලිපිනය</span><span id="acc-loc" style="text-align:right;max-width:180px;word-break:break-word">—</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)" id="acc-route-row"><span style="color:var(--text3)">🗺 Route</span><span id="acc-route" style="color:var(--accent);text-align:right">—</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0" id="acc-pay-row" style="display:none"><span style="color:var(--text3)">ගෙවීම් ක්‍රමය</span><span id="acc-pay">—</span></div>
+          </div>
+          <button class="btn btn-ghost btn-full" onclick="doLogout()" style="margin-top:14px">🚪 ගිණුමෙන් ඉවත් වන්න</button>
+        </div>
+        <div class="acc-card">
+          <div class="acc-card-title">🚚 Delivery</div>
+          <div id="acc-delivery" style="font-size:13px;color:var(--text2)">Loading...</div>
+        </div>
+      </div>
+      <div>
+        <!-- LOYALTY CARD -->
+        <div class="loyalty-card">
+          <div class="lc-tier" id="lc-tier-name">BRONZE MEMBER</div>
+          <div class="lc-pts" id="lc-pts">0</div>
+          <div class="lc-sub">Loyalty Points</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px">
+            <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--green)" id="lc-val">රු. 0</div><div style="font-size:13px;color:rgba(255,255,255,.4)">Value</div></div>
+            <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--teal)" id="lc-saved">රු. 0</div><div style="font-size:13px;color:rgba(255,255,255,.4)">සම්පූර්ණ ඉතිරිය</div></div>
+            <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--gold)" id="lc-orders">0</div><div style="font-size:13px;color:rgba(255,255,255,.4)">ඇණවුම්</div></div>
+          </div>
+          <div class="lc-progress"><div class="lc-bar" id="lc-bar" style="width:10%"></div></div>
+          <div class="lc-next" id="lc-next">ඊළඟ tier ලබා ගැනීමට</div>
+        </div>
+        <div class="acc-card">
+          <div class="acc-card-title">📊 සාරාංශය</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--accent)" id="sum-orders">0</div><div style="font-size:13px;color:var(--text3);margin-top:2px">ඇණවුම්</div></div>
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--green)" id="sum-spent">0</div><div style="font-size:13px;color:var(--text3);margin-top:2px">Total Spent</div></div>
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--gold)" id="sum-saved">0</div><div style="font-size:13px;color:var(--text3);margin-top:2px">Loyalty Saved</div></div>
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--teal)" id="sum-pts">0</div><div style="font-size:13px;color:var(--text3);margin-top:2px">Points Balance</div></div>
+          </div>
+        </div>
+        <div class="acc-card" id="acc-b2b-card" style="display:none">
+          <div class="acc-card-title">📋 Bill-to-Bill — Credit Balance</div>
+          <div id="acc-b2b-inner">
+            <!-- rendered by renderAccount() -->
+          </div>
+        </div>
+        <div class="acc-card" id="savings-breakdown-card">
+          <div class="acc-card-title">💰 ඉතිරි කළ ආකාරය</div>
+          <div id="savings-breakdown"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPORT -->
+  <div class="page" id="page-support">
+    <div style="padding:20px;max-width:580px;margin:0 auto">
+      <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:16px">💬 සහාය සේවය</div>
+      <div class="acc-card">
+        <div class="fg"><label class="fl">වර්ගය</label><select class="fs" id="c-type"><option value="complaint">පැමිණිල්ල</option><option value="request">ඉල්ලීමක්</option><option value="inquiry">විමසීමක්</option></select></div>
+        <div class="fg"><label class="fl">මාතෘකාව</label><input class="fi" id="c-sub" placeholder="කෙටි මාතෘකාවක්"></div>
+        <div class="fg"><label class="fl">පණිවිඩය</label><textarea class="fi" id="c-txt" placeholder="ඔබේ ගැටළු හෝ ඉල්ලීම ලියන්න..."></textarea></div>
+        <button class="btn btn-primary btn-full" onclick="submitComplaint()">ඉදිරිපත් කරන්න →</button>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:10px">මගේ ඉල්ලීම්</div>
+          <div id="my-comp"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="mo" id="pd-modal">
+  <div class="modal">
+    <div class="mh"><div class="mt" id="pdm-cat">—</div><button class="mc" onclick="cm('pd-modal')">✕</button></div>
+    <div class="mb">
+      <div class="pd-img" id="pdm-img"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+        <div><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;margin-bottom:3px" id="pdm-name"></div><div style="font-size:13px;color:var(--text3)" id="pdm-stock-lbl"></div></div>
+        <div id="pdm-badges"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px">
+          <div style="font-size:13px;color:var(--text3);letter-spacing:1px;margin-bottom:4px" id="pdm-price-lbl">විකිණීමේ මිල</div>
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--accent)" id="pdm-price">—</div>
+        </div>
+        <div id="pdm-other-cell" style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px;display:none">
+          <div style="font-size:13px;color:var(--text3);letter-spacing:1px;margin-bottom:4px" id="pdm-other-lbl">අපේ මිල</div>
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text2)" id="pdm-other-price">—</div>
+        </div>
+        <div id="pdm-cash-cell" style="display:none;background:rgba(46,213,115,.06);border:1px solid rgba(46,213,115,.2);border-radius:var(--r-sm);padding:12px">
+          <div style="font-size:13px;color:var(--text3);letter-spacing:1px;margin-bottom:4px">💵 Cash ගෙවූ විට</div>
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--green)" id="pdm-cash-price">—</div>
+          <div style="font-size:13px;color:var(--green);margin-top:2px" id="pdm-cash-save"></div>
+        </div>
+      </div>
+      <div id="pdm-bulk-note" style="display:none;background:var(--accent-dim);border:1px solid rgba(232,255,71,.2);border-radius:var(--r-sm);padding:10px;font-size:13px;color:var(--accent);margin-bottom:12px"></div>
+      <div style="display:flex;gap:10px">
+        <div class="qty-ctrl" style="flex:1"><button class="qb" onclick="pdQty(-1)">−</button><input class="qv" id="pd-qty" value="1" type="number" min="1" style="min-width:30px;text-align:center"><button class="qb" onclick="pdQty(+1)">+</button></div>
+        <button class="btn btn-primary" id="pdm-add-btn" onclick="pdAddCart()" style="flex:2;padding:11px">🛒 Cart-ට එකතු කරන්න</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT QUICK-ADD POPUP (bottom sheet) -->
+<div class="pp-overlay" id="pp-overlay" onclick="closeProdPopup()"></div>
+<div id="prod-popup">
+  <div class="pp-handle" onclick="closeProdPopup()"></div>
+  <div class="pp-body">
+    <div class="pp-img" id="pp-img"></div>
+    <div class="pp-name" id="pp-name"></div>
+    <div class="pp-cat" id="pp-cat"></div>
+    <div id="pp-badges" style="margin-bottom:8px"></div>
+    <div class="pp-prices" id="pp-prices"></div>
+    <div id="pp-bulk" style="display:none;background:var(--accent-dim);border:1px solid rgba(232,255,71,.2);border-radius:var(--r-sm);padding:9px;font-size:13px;color:var(--accent);margin-bottom:12px"></div>
+    <div class="pp-actions">
+      <div class="qty-ctrl" style="flex:1">
+        <button class="qb" onclick="ppQty(-1)">−</button>
+        <input class="qv" id="pp-qty" value="1" type="number" min="1" style="min-width:34px;text-align:center">
+        <button class="qb" onclick="ppQty(+1)">+</button>
+      </div>
+      <button class="btn btn-primary" id="pp-add-btn" onclick="ppAddCart()" style="flex:2;padding:12px 0;font-size:14px">🛒 Cart-ට එකතු කරන්න</button>
+    </div>
+    <div id="pp-stock-lbl" style="text-align:center;font-size:12px;color:var(--text3);margin-top:8px"></div>
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cart-ov"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cd-head">
+    <div class="cd-title">🛒 මිලදී ගැනීමේ ලැයිස්තුව</div>
+    <button id="cd-close-btn" style="background:none;border:none;color:var(--text3);font-size:13px;cursor:pointer" onclick="tryCloseCart()">✕</button>
+  </div>
+  <div class="cd-items" id="cd-items"><div style="text-align:center;padding:50px 20px;color:var(--text3)"><div style="font-size:40px;margin-bottom:10px;opacity:.25">🛒</div><div style="font-size:13px">ලැයිස්තුව හිස් ය</div></div></div>
+  <!-- B2B pay info (wholesale only) — separate from items so input persists -->
+  <div id="cd-pay-info" style="padding:0 14px 8px;border-bottom:1px solid var(--border)"></div>
+  <!-- Persistent partial pay row (separate from innerHTML to keep value) -->
+  <div id="cd-partial-row" style="display:none;padding:0 14px 8px;border-bottom:1px solid var(--border)">
+    <div style="font-size:13px;color:var(--text3);margin-bottom:5px">🔄 දැන් කොටසක් ගෙවීමට — optional</div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <input id="cust-partial-pay" type="number" min="0" placeholder="දැන් ගෙවන මුදල (රු.)..." oninput="updatePartialPreview()" style="flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);color:var(--text);font-size:16px;outline:none;box-sizing:border-box">
+      <button onclick="document.getElementById('cust-partial-pay').value='';updatePartialPreview()" style="background:none;border:1px solid var(--border);border-radius:7px;padding:6px 10px;color:var(--text3);cursor:pointer;font-size:13px">✕</button>
+    </div>
+    <div id="cd-partial-preview" style="margin-top:5px;font-size:13px;color:var(--teal)"></div>
+  </div>
+  <div class="cd-foot">
+    <div class="sum-row"><span style="color:var(--text3)">බිල් මිල</span><span id="cd-sub">රු. 0.00</span></div>
+    <div class="sum-row" id="cd-save-price-row" style="display:none"><span style="color:var(--green)">💰 විකිණීමේ → අපේ මිල</span><span id="cd-save-price-amt" style="color:var(--green)"></span></div>
+    <div class="sum-row" id="cd-special-row" style="display:none"><span style="color:#facc15">🏷 විශේෂ දීමනා</span><span id="cd-special-disc" style="color:#facc15"></span></div>
+    <div class="sum-row" id="cd-bulk-row" style="display:none"><span style="color:var(--teal)">📊 ප්‍රමාණ දීමනාව</span><span id="cd-bulk-disc" style="color:var(--teal)"></span></div>
+    <div class="sum-row" id="cd-ws-row" style="display:none"><span style="color:var(--green)">🏭 Wholesale</span><span id="cd-ws-disc" style="color:var(--green)"></span></div>
+    <div class="sum-row" id="cd-cash-row" style="display:none"><span style="color:var(--green)">💵 Cash දීමනාව</span><span id="cd-cash-disc" style="color:var(--green)"></span></div>
+    <div class="sum-row" id="cd-tier-row" style="display:none"><span id="cd-tier-label" style="color:#c084fc">⭐ Tier</span><span id="cd-tier-disc" style="color:#c084fc"></span></div>
+    <div class="sum-row" id="cd-loyalty-row" style="display:none"><span style="color:var(--gold)">⭐ Loyalty</span><span id="cd-loyalty-disc" style="color:var(--gold)"></span></div>
+    <div id="cd-saved-banner" style="display:none;background:rgba(21,128,61,.13);border:2px solid rgba(21,128,61,.4);border-radius:9px;padding:9px 13px;margin:8px 0;flex-direction:row;justify-content:space-between;align-items:center">
+      <span style="color:var(--green);font-size:13px;font-weight:700">🟢 අත ඉතිරි මුදල</span>
+      <span id="cd-save-amt" style="color:var(--green);font-family:'Syne',sans-serif;font-size:13px;font-weight:800"></span>
+    </div>
+    <div class="sum-row total" style="margin-top:4px"><span>සම්පූර්ණ</span><span class="amt" id="cd-total">රු. 0.00</span></div>
+    <div class="cd-actions" style="display:flex;flex-direction:column;gap:7px;margin-top:12px">
+      <button class="btn btn-primary btn-full" id="checkout-btn" onclick="openCheckout()" disabled>ඇණවුම දෙන්න →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="mo" id="checkout-modal">
+  <div class="modal" style="max-width:530px">
+    <div class="mh"><div class="mt">ඇණවුම තහවුරු කරන්න</div><button class="mc" onclick="cm('checkout-modal')">✕</button></div>
+    <div class="mb">
+      <div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px">📋 ඇණවුම් ලැයිස්තුව</div>
+      <div id="co-items" style="margin-bottom:14px"></div>
+      <div class="receipt" id="co-receipt"></div>
+      <div style="margin-top:14px">
+        <!-- DELIVERY TYPE -->
+        <div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:7px">ලැබීමේ ක්‍රමය</div>
+        <div class="del-opts">
+          <div class="do sel" id="do-del" onclick="setDelType('delivery')"><div class="do-ico">🚚</div><div class="do-lbl">ගෙදර දොරා</div><div class="do-sub">Home Delivery</div></div>
+          <div class="do" id="do-pick" onclick="setDelType('pickup')"><div class="do-ico">🏪</div><div class="do-lbl">සාප්පුවෙන් ගන්න</div><div class="do-sub">Store Pickup</div></div>
+        </div>
+        <div class="fg" id="co-addr-row"><label class="fl">ලිපිනය</label><input class="fi" id="co-addr" placeholder="සම්පූර්ණ ලිපිනය ඇතුල් කරන්න"></div>
+        <div class="fg" id="co-date-row">
+          <label class="fl">බෙදාහැරීමේ දිනය</label>
+          <input class="fi" id="co-date" type="date" readonly>
+          <div style="font-size:13px;color:var(--text3);margin-top:3px" id="co-date-note"></div>
+        </div>
+
+        <!-- PAYMENT SELECTOR -->
+        <div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:7px;margin-top:14px">💳 ගෙවීම් ක්‍රමය</div>
+        <div class="pay-opts" id="pay-opts-container"></div>
+        <div id="card-fields" style="display:none">
+          <div class="fr">
+            <div class="fg"><label class="fl">Card Number</label><input class="fi" id="co-card" placeholder="4242 4242 4242 4242"></div>
+            <div class="fg"><label class="fl">Expiry</label><input class="fi" id="co-exp" placeholder="MM/YY"></div>
+          </div>
+          <div class="fr">
+            <div class="fg"><label class="fl">කාඩ්පත් හිමිකරු නම</label><input class="fi" id="co-cname" placeholder="කාඩ්පතේ ඇති නම"></div>
+            <div class="fg"><label class="fl">CVV</label><input class="fi" id="co-cvv" placeholder="123" maxlength="4"></div>
+          </div>
+        </div>
+        <div id="co-cash-savings" style="display:none" class="cash-save-tag"></div>
+
+        <!-- LOYALTY REDEEM -->
+        <div id="loyalty-redeem-section" style="display:none">
+          <div class="loyalty-redeem-box">
+            <div class="lrb-title">⭐ Loyalty Points Redeem කරන්නද?</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <div style="font-size:13px;color:var(--text2)">Points: <span id="co-pts-bal" style="color:var(--gold);font-weight:700">0</span> · වටිනාකම: <span id="co-pts-val" style="color:var(--green)">රු. 0</span></div>
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--text2)">
+                <input type="checkbox" id="co-redeem" onchange="updateCheckoutTotals()"> Points භාවිත කරන්න
+              </label>
+            </div>
+            <div style="font-size:13px;color:var(--text3)" id="co-pts-limit"></div>
+          </div>
+        </div>
+
+        <div class="fg"><label class="fl">සටහන (අනිවාර්ය නොවේ)</label><input class="fi" id="co-note" placeholder="විශේෂ උපදෙස්..."></div>
+      </div>
+      <div class="fa">
+        <button class="btn btn-ghost" onclick="cm('checkout-modal')">← ආපසු</button>
+        <button class="btn btn-primary" onclick="placeOrder()" style="flex:1">✓ ඇණවුම දෙන්න</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECEIPT MODAL -->
+<div class="mo" id="receipt-modal">
+  <div class="modal" style="max-width:420px">
+    <div class="mh"><div class="mt">📄 බිල්පත</div><button class="mc" onclick="cm('receipt-modal')">✕</button></div>
+    <div class="mb"><div id="view-receipt"></div></div>
+  </div>
+</div>
+
+<div class="tc" id="tc"></div>
+
+  <script src="mart-customer.js"></script>
+</body>
+</html>
